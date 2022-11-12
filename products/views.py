@@ -12,5 +12,7 @@ def bm(reguest):
 def bi(reguest):
     return HttpResponse('Goodby user!')
 
+print('commit')
+
 
 

@@ -1,29 +1,26 @@
 {% extends 'layouts/main.html' %}
-
 {% block content %}
     <style type="text/css">
-        .products {
+        .posts {
             display: flex;
             justify-content: space-between;
             width: 80%;
             margin-left: 10%;
         }
     </style>
-    <div class="Posts">
+    <div class="posts">
         {% for Post in Posts %}
             <div class="card" style="width: 20%">
                 <div class="card-body">
-                    <h5 class="card-title">{{ Post_view.title }}</h5>
-                    <a href="#" class="btn btn-primary">More</a>
+                    <h5 class="card-title">{{ Post.title }}</h5>
+                    <a href="/posts/{{ Post.id }}/" class="btn btn-primary">More</a>
                 </div>
             </div>
         {% endfor %}
     </div>
+
+
+
+
 {% endblock %}
-
-
-
-
-
-
 

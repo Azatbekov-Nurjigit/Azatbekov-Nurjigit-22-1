@@ -1,9 +1,7 @@
-
 {% extends 'layouts/main.html' %}
-
 {% block content %}
     <style type="text/css">
-        .products {
+        .hashtags {
             display: flex;
             justify-content: space-between;
             width: 80%;
@@ -14,8 +12,8 @@
         {% for hashtag in hashtags %}
             <div class="card" style="width: 20%">
                 <div class="card-body">
-                    <h5 class="card-title">{{ Hashtag_view.title }}</h5>
-                    <a href="#" class="btn btn-primary">More</a>
+                    <h5 class="card-title">{{ hashtag.description }}</h5>
+                    <a href="/posts/?hashtag_id={{ hashtag.id }}" class="btn btn-primary">More</a>
                 </div>
             </div>
         {% endfor %}

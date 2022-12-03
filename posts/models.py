@@ -1,12 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-
 # Create your models here.
 
 class Post(models.Model):
     title = models.CharField(max_length=255)
-    image = models.ImageField()
+    image = models.ImageField(null=True, blank=True)
     rate = models.DecimalField(max_digits=10, decimal_places=1)
     hashtags = models.ManyToManyField('Hashtag', related_name='posts')
 
@@ -22,7 +21,6 @@ class Hashtag(models.Model):
     def __str__(self):
         return self.description
 
-
 class Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.TextField()
@@ -30,3 +28,27 @@ class Comment(models.Model):
 
     def __str__(self):
         return f'{self.author.username}_{self.text}'
+
+
+
+# class GreatePost(models.Model):
+
+
+
+
+
+
+
+
+
+
+
+# FORMS:
+# - PostCreateForm - для создания поста
+# - CommentCreateForm - для создания комментария
+#
+# ШАБЛОНЫ:
+# - posts/create.html -> страница для того что-бы создать пост
+# URLS:
+# - posts/create/ -> view: post_create_view
+# сделать создание постов, и создание комментариев на какой-то пост

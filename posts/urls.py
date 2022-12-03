@@ -1,5 +1,5 @@
 from django.urls import path
-from posts.views import bm, bi, bn, hashtag_view, post_view, post_detail_view
+from posts.views import bm, bi, bn, hashtag_view, post_view, post_detail_view ,post_create_view
 
 
 urlpatterns = [
@@ -8,6 +8,7 @@ urlpatterns = [
     path('goodbye/', bi),
     path('hashtags/', hashtag_view),
     path('posts/', post_view),
-    path('posts/<int:id>/', post_detail_view)
+    path('posts/<int:id>/', post_detail_view),
+    path('posts/create/', post_create_view)
 
 ]

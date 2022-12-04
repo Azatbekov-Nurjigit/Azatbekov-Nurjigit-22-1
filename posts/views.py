@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from posts.models import Post, Hashtag, Comment
 from posts.forms import PostCreateForm, CommentCreateForm
 from datetime import datetime
+from users.utils import get_user_from_request
 
 
 def bn(reguest):
@@ -22,7 +23,8 @@ def hashtag_view(reguest):
     if reguest.method == 'GET':
         hashtags = Hashtag.objects.all()
         data = {
-            'hashtags': hashtags
+            'hashtags': hashtags,
+            'user': get_user_from_request(reguest)
         }
         return render(reguest, 'hashtag/hashtag.html', context=data)
 
@@ -35,7 +37,8 @@ def post_view(reguest):
         else:
             posts = Post.objects.all()
         data = {
-            'Posts': posts
+            'Posts': posts,
+            'user': get_user_from_request(reguest)
         }
         return render(reguest, 'post/postt.html', context=data)
 
@@ -46,7 +49,8 @@ def post_detail_view(reguest, **kwargs):
         data = {
             'post': post,
             'comments': Comment.objects.filter(post=post),
-            'form': CommentCreateForm
+            'form': CommentCreateForm,
+            'user': get_user_from_request(reguest)
         }
         return render(reguest, 'yuiiu/vgjk.html', context=data)
 
@@ -67,7 +71,8 @@ def post_detail_view(reguest, **kwargs):
             data = {
                 'post': post,
                 'comments': comment,
-                'form': form
+                'form': form,
+                'user': get_user_from_request(reguest)
             }
             return render(reguest, 'yuiiu/vgjk.html', context=data)
 
@@ -75,7 +80,8 @@ def post_detail_view(reguest, **kwargs):
 def post_create_view(reguest):
     if reguest.method == 'GET':
         data = {
-            'form': PostCreateForm
+            'form': PostCreateForm,
+            'user': get_user_from_request(reguest)
         }
         return render(reguest, 'post/create.html', context=data)
 
@@ -90,6 +96,7 @@ def post_create_view(reguest):
             return redirect('/posts/')
         else:
             data = {
-                'form': form
+                'form': form,
+                'user': get_user_from_request(reguest)
             }
             return render(reguest, 'post/create.html', context=data)

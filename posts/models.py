@@ -38,17 +38,3 @@ class Comment(models.Model):
 
 
 
-
-
-
-
-
-# FORMS:
-# - PostCreateForm - для создания поста
-# - CommentCreateForm - для создания комментария
-#
-# ШАБЛОНЫ:
-# - posts/create.html -> страница для того что-бы создать пост
-# URLS:
-# - posts/create/ -> view: post_create_view
-# сделать создание постов, и создание комментариев на какой-то пост

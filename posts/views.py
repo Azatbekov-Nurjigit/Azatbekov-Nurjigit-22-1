@@ -6,6 +6,7 @@ from posts.forms import PostCreateForm, CommentCreateForm
 from datetime import datetime
 from users.utils import get_user_from_request
 
+PAGINATION_LIMIT = 4
 
 def bn(reguest):
     return HttpResponse('Hello! Its my project')
@@ -32,13 +33,23 @@ def hashtag_view(reguest):
 def post_view(reguest):
     if reguest.method == 'GET':
         hashtag_id = reguest.GET.get('hashtag_id')
+        search_text = reguest.GET.get('search')
+        page = int(reguest.GET.get('page', 1))
         if hashtag_id:
             posts = Hashtag.objects.get(id=hashtag_id).posts.all()
         else:
             posts = Post.objects.all()
+
+        if search_text:
+            posts = posts.filter(title__icontains=search_text)
+
+        max_page = round(posts.__len__() / PAGINATION_LIMIT)
+        posts = posts[PAGINATION_LIMIT * (page-1):PAGINATION_LIMIT * page]
         data = {
             'Posts': posts,
-            'user': get_user_from_request(reguest)
+            'user': get_user_from_request(reguest),
+            'hashtag_id': hashtag_id,
+            'max_page': range(1, max_page + 1)
         }
         return render(reguest, 'post/postt.html', context=data)
 

@@ -7,7 +7,19 @@
             width: 80%;
             margin-left: 10%;
         }
+        .search {
+            width: 80%;
+                }
     </style>
+        <div class="search">
+        <form action="/posts/" method="get">
+            {% if hashtag_id %}
+                <input type="hidden" name="hashtag_id" value="{{ hashtag_id }}">
+            {% endif %}
+            <span>Search</span>
+            <input type="text" name="search" value="">
+        </form>
+    </div>
     <div class="posts">
         {% for Post in Posts %}
             <div class="card" style="width: 20%">
@@ -16,6 +28,13 @@
                     <a href="/posts/{{ Post.id }}/" class="btn btn-primary">More</a>
                 </div>
             </div>
+        {% endfor %}
+    </div>
+        <div>
+        {% for page in max_page %}
+            <a href="/posts/?page={{ page }}">
+                <button>{{ page }}</button>
+            </a>
         {% endfor %}
     </div>
 {% endblock %}
